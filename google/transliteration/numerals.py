@@ -17,6 +17,13 @@ LANG2SCRIPT = {
     'ml': 'Malayalam',
     'ta': 'Tamil',
     'te': 'Telugu',
+    
+    # South-East Asia
+    'bo': 'Tibetan',
+    'lo': 'Lao',
+    'my': 'Burmese',
+    'sat': 'Ol Chiki',
+    'th': 'Thai',
 
     # Cyrllic
     'be': 'Greek-Upper',
@@ -32,6 +39,7 @@ LANG2SCRIPT = {
     
     # Chinese family
     'ja': 'Chinese',
+    'ko': 'Chinese',
     'yue-hant': 'Chinese',
     'zh-hant': 'Chinese',
     'zh': 'Chinese',
@@ -43,7 +51,6 @@ LANG2SCRIPT = {
     # More scripts
     'el': 'Greek-Lower',
     'he': 'Hebrew',
-    'th': 'Thai',
     
 }
 
@@ -52,16 +59,22 @@ EN_NUMERALS = '0123456789'
 NATIVE_NUMERALS = {
     # Brahmic scripts
     'Bengali-Assamese'  : '০১২৩৪৫৬৭৮৯',
+    'Burmese'           : '၀၁၂၃၄၅၆၇၈၉',
     'Devanagari'        : '०१२३४५६७८९',
     'Gujarati'          : '૦૧૨૩૪૫૬૭૮૯',
     'Gurmukhi'          : '੦੧੨੩੪੫੬੭੮੯',
     'Kannada'           : '೦೧೨೩೪೫೬೭೮೯',
+    'Lao'               : '໐໑໒໓໔໕໖໗໘໙',
     'Malayalam'         : '൦൧൨൩൪൫൬൭൮൯',
+    'Ol Chiki'          : '᱐᱑᱒᱓᱔᱕᱖᱗᱘᱙',
     'Oriya'             : '୦୧୨୩୪୫୬୭୮୯',
     'Sinhala'           : '෦෧෨෩෪෫෬෭෮෯',
     'Tamil'             : '௦௧௨௩௪௫௬௭௮௯',
     'Telugu'            : '౦౧౨౩౪౫౬౭౮౯',
     'Thai'              : '๐๑๒๓๔๕๖๗๘๙',
+    'Tibetan'           : '༠༡༢༣༤༥༦༧༨༩',
+    
+    'Hindu-Arabic'      : EN_NUMERALS,
     
     # Arabic
     'Eastern-Arabic'    : '۰۱۲۳۴۵۶۷۸۹',
@@ -72,7 +85,7 @@ NATIVE_NUMERALS = {
     # TODO: Add Macron diacritic on top?
     'Greek-Lower'      : '0αβγδεϛζηθ',
     'Greek-Upper'      : '0ΑΒΓΔΕϚΖΗΘ',
-    'Geʽez'            : '፩፪፫፬፭፮፯፰፱',
+    'Geʽez'            : '0፩፪፫፬፭፮፯፰፱',
     
     'Chinese'          : '〇一二三四五六七八九',
 }
@@ -82,16 +95,16 @@ NUMERAL_MAP = {
         for script, numerals in NATIVE_NUMERALS.items()
 }
 
-def transliterate_numerals(s: str, lang_code: str) -> str:
-    """Convert from standard Hindu-Arabic numerals to native numerals
+def transliterate_numerals(text: str, lang_code: str) -> str:
+    """Convert standard Hindu-Arabic numerals in given text to native numerals
 
     Args:
-        s (str): The text to transliterate from.
+        text (str): The text in which numeral digits should be transliterated.
         lang_code (str): The target language's ISO639 code
 
     Returns:
         str: Returns transliterated text with numerals converted to native form.
     """
     if lang_code == 'en':
-        return s
-    return s.translate(NUMERAL_MAP[LANG2SCRIPT[lang_code]])
+        return text
+    return text.translate(NUMERAL_MAP[LANG2SCRIPT[lang_code]])
