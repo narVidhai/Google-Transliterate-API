@@ -1,6 +1,7 @@
 import requests
 import json
 import sys
+from .numerals import transliterate_numerals
 
 G_API = 'https://inputtools.google.com/request?text=%s&itc=%s-t-i0-und&num=%d'
 G_API_PINYIN = 'https://inputtools.google.com/request?text=%s&itc=%s-t-i0-pinyin&num=%d'
@@ -26,12 +27,13 @@ def transliterate_word(word: str, lang_code: str, max_suggestions: int = 6) -> l
         return []
     return r[1][0][1]
 
-def transliterate_text(text: str, lang_code: str) -> str:
+def transliterate_text(text: str, lang_code: str, convert_numerals: bool = False) -> str:
     """[Experimental] Transliterate a given sentence or text to the required language.
 
     Args:
         text (str): The text to transliterate from Latin/Roman (English) script.
         lang_code (str): The target language's ISO639 code
+        convert_numerals (bool): Transliterate numerals. Defaults to False.
 
     Returns:
         str: Transliterated text.
@@ -40,4 +42,7 @@ def transliterate_text(text: str, lang_code: str) -> str:
     for word in text.split():
         # TODO: Handle punctuations and numbers?
         result.append(transliterate_word(word, lang_code, 1)[0])
-    return ' '.join(result)
+    result = ' '.join(result)
+    if convert_numerals:
+        result = transliterate_numerals(result, lang_code)
+    return result

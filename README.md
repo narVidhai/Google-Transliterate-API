@@ -33,11 +33,21 @@ The above transliterates the word 'America' into Japanese script and returns a l
 
 ```py
 from google.transliteration import transliterate_text
-result = transliterate_text('Hello comrade!', 'ru')
+result = transliterate_text('Hello comrade!', lang_code='ru')
 print(result)
 ```
 
 > хелло комраде!
+
+### Transliterate numerals
+
+```py
+from google.transliteration import transliterate_numerals
+result = transliterate_numerals('3210', lang_code='zh')
+print(result)
+```
+
+> 三二一〇
 
 ---
 

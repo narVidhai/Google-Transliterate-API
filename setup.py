@@ -6,7 +6,7 @@ README = (HERE / "README.md").read_text(encoding='utf-8')
 
 setup(
     name="google-transliteration-api",
-    version="1.0.1",
+    version="1.0.2",
     description="Google Transliterate API for Python",
     long_description=README,
     long_description_content_type="text/markdown",
