@@ -32,7 +32,8 @@ LANG2SCRIPT = {
     
     # Chinese family
     'ja': 'Chinese',
-    'yue': 'Chinese',
+    'yue-hant': 'Chinese',
+    'zh-hant': 'Chinese',
     'zh': 'Chinese',
     
     # African

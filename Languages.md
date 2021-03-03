@@ -1,6 +1,10 @@
 # Google Input Tools - Transliteration scripts
 
-Transliterate from English to any of the languages.
+Transliterate from romanized text to any of the following languages.
+
+Note:  
+- Google Input Tools actually uses back-transliteration models for conversion.
+  - Hence it might not produce good results for English language words, because English is phonetically impure (In English, pronounciations vary from the way we write it in Latin alphabet)
 
 ## Languages Supported
 
@@ -43,13 +47,6 @@ Transliterate from English to any of the languages.
 |Persian (فارسی)|fa|
 |Urdu (اُردُو)|ur|
 
-### Chinese scripts
-
-|Language|Usage Code|
-|--------|-----------|
-|Yue (HongKong Chinese)|yue-hant|
-|Zhōngwén (Simplified Chinsese)|zh|
-
 ### More scripts
 
 |Language|ISO639 Code|
@@ -60,3 +57,22 @@ Transliterate from English to any of the languages.
 |Japanese (日本語)|ja|
 |Thai (ภาษาไทย)|th|
 |Tigrinya (ትግርኛ)|ti|
+
+### Chinese scripts
+
+|Language|Usage Code|Supported Input Schemes|
+|--------|-----------|------------|
+|Simplified Chinsese (Zhōngwén)|zh|`pinyin`, `pinyin-x0-shuangpin-abc`, `pinyin-x0-shuangpin-ms`, `pinyin-x0-shuangpin-flypy`, `pinyin-x0-shuangpin-jiajia`, `pinyin-x0-shuangpin-ziguang`, `pinyin-x0-shuangpin-ziranma`, `wubi-1986`|
+|Traditional Chinese (Taiwan)|zh-hant|`pinyin`, `cangjie-1982`|
+|Yue (HongKong Chinese)|yue-hant|`jyutping`, `und`|
+
+Note:  
+- `und` means undefined, by which Google uses default transliterator.
+
+#### Chinese Usage
+
+```py
+from google.transliteration import transliterate_text
+result = transliterate_text('Zen', lang_code='zh', input_scheme='pinyin')
+print(result)
+```
